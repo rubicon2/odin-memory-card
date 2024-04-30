@@ -22,5 +22,39 @@ a:hover {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+button {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.6em 1.8em;
+  border-radius: 15px;
+  border: none;
+
+  background-color: #646cff;
+  color: white;
+
+  cursor: pointer;
+}
+button:hover {
+  background-color: #535bf2;
 }
