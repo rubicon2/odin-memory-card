@@ -11,9 +11,13 @@ export default function GameOver({
 
   const scoreMessage =
     score > highScore ? (
-      <h2>You scored {score} points... it's a new high score!</h2>
+      <div className="score-message">
+        You scored {score} points... it's a new high score!
+      </div>
     ) : (
-      <h2>You scored {score} points. Better luck next time!</h2>
+      <div className="score-message">
+        You scored {score} points. Better luck next time!
+      </div>
     );
 
   return (
@@ -21,7 +25,7 @@ export default function GameOver({
       <div className="modal-container">
         <h1>Game Over!</h1>
         {scoreMessage}
-        <button type="button" onClick={onReset}>
+        <button className="game-over-button" type="button" onClick={onReset}>
           Play Again
         </button>
       </div>

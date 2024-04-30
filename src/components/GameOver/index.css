@@ -23,10 +23,24 @@
 }
 
 .modal-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
   background-color: rgb(255, 255, 255);
   color: black;
   border-radius: 15px;
   padding: 2rem 4rem;
 
   box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.219);
+}
+
+.score-message {
+  font-size: 1.1rem;
+  font-weight: 300;
+  margin-bottom: 0.5em;
+}
+
+.game-over-button {
+  align-self: center;
 }
