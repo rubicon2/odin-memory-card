@@ -1,11 +1,13 @@
 .card {
-  border: 5px solid pink;
-  padding: 2rem;
+  background-color: antiquewhite;
+  padding: 1rem;
+  border-radius: 10px;
 }
 
 .card > img {
   object-fit: cover;
   height: 100%;
   width: 100%;
-  border: 2px solid black;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.082);
 }
