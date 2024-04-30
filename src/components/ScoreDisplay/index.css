@@ -1,0 +1,13 @@
+.score-display {
+  font-size: 1.5rem;
+}
+
+.score-display-section {
+  display: flex;
+  gap: 0 2rem;
+  justify-content: space-between;
+}
+
+.info-display--score-title {
+  font-weight: 700;
+}
