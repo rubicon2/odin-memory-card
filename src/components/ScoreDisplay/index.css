@@ -1,5 +1,8 @@
 .score-display {
   font-size: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
 }
 
 .score-display-section {
@@ -19,4 +22,11 @@
   /* Allow enough width for up to 2 digits as max score is 10 */
   min-width: 2rem;
   text-align: right;
+}
+
+@media (min-width: 500px) {
+  .score-display {
+    display: block;
+    margin: 0;
+  }
 }
