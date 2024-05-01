@@ -12,6 +12,7 @@
   flex-grow: 1;
   text-align: right;
   font-weight: 700;
+  width: max-content;
 }
 
 .info-display--score {
