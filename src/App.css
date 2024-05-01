@@ -1,5 +1,6 @@
 .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 1rem 0;
+  /* Min to keep side padding getting too big at medium viewport widths */
+  padding: 1rem min(5vw, 2rem);
 }

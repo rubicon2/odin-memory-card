@@ -46,7 +46,9 @@ function App() {
           highScore={highScore}
         />
       </div>
-      <CardsDisplay images={images} onClick={handleCardClick} />
+      <div className="container">
+        <CardsDisplay images={images} onClick={handleCardClick} />
+      </div>
       <GameOver
         score={clickedImages.length}
         highScore={highScore}
