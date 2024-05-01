@@ -14,6 +14,8 @@ function App() {
   const [clickedImages, setClickedImages] = useState([]);
   const [isGameOver, setIsGameOver] = useState(false);
   const [highScore, setHighScore] = useState(0);
+  const [currentTopic, setCurrentTopic] = useState('cats');
+  const [topicErrorMsg, setTopicErrorMsg] = useState('');
 
   function handleCardClick(image) {
     if (clickedImages.includes(image)) setIsGameOver(true);
@@ -23,18 +25,25 @@ function App() {
     }
   }
 
-  function handleReset() {
+  function handleReset(newTopic) {
     if (clickedImages.length > highScore) setHighScore(clickedImages.length);
     setClickedImages([]);
-    setImages(randomiseArray(images));
-    setIsGameOver(false);
+    setCurrentTopic(newTopic);
   }
 
   useEffect(() => {
-    getGifs('cats', 10).then((gifs) => {
-      setImages(randomiseArray(gifs));
+    getGifs(currentTopic, 10).then((gifs) => {
+      // If the topic doesn't yield 10 gifs, then ask for another prompt
+      if (gifs.length < 10) {
+        // Do ! Some ! Thing!
+        setTopicErrorMsg('Not enough gifs! Try another search term.');
+      } else {
+        setTopicErrorMsg(null);
+        setImages(randomiseArray(gifs));
+        setIsGameOver(false);
+      }
     });
-  }, []);
+  }, [currentTopic]);
 
   return (
     <>
@@ -52,8 +61,9 @@ function App() {
       <GameOver
         score={clickedImages.length}
         highScore={highScore}
-        active={isGameOver}
+        active={true}
         onReset={handleReset}
+        topicErrorMsg={topicErrorMsg}
       />
     </>
   );

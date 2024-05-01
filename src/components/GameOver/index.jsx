@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import './index.css';
 
 export default function GameOver({
@@ -5,7 +7,11 @@ export default function GameOver({
   highScore,
   active = false,
   onReset,
+  topicErrorMsg,
 }) {
+  const [searchString, setSearchString] = useState('');
+  console.log(searchString);
+
   let modalClass = 'game-over-modal';
   if (active) modalClass += ' game-over-modal-active';
 
@@ -25,7 +31,19 @@ export default function GameOver({
       <div className="modal-container">
         <h1>Game Over!</h1>
         {scoreMessage}
-        <button className="game-over-button" type="button" onClick={onReset}>
+        <input
+          placeholder="Search for new images..."
+          value={searchString}
+          onChange={(event) => setSearchString(event.currentTarget.value)}
+        />
+        {topicErrorMsg && (
+          <div className="topic-error-msg">{topicErrorMsg}</div>
+        )}
+        <button
+          className="game-over-button"
+          type="button"
+          onClick={() => onReset(searchString)}
+        >
           Play Again
         </button>
       </div>

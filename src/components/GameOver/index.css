@@ -15,6 +15,8 @@
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
+
+  font-weight: 300;
 }
 
 .game-over-modal-active {
@@ -25,7 +27,7 @@
 .modal-container {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
 
   background-color: rgb(255, 255, 255);
   color: black;
@@ -38,10 +40,14 @@
 
 .score-message {
   font-size: 1.1rem;
-  font-weight: 300;
+
   margin-bottom: 0.5em;
 }
 
 .game-over-button {
   align-self: center;
+}
+
+.topic-error-msg {
+  color: red;
 }

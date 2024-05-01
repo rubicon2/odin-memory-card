@@ -41,12 +41,20 @@ img {
   max-width: 100%;
 }
 
+input,
 button {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-size: 1rem;
-  font-weight: 700;
   padding: 0.6em 1.8em;
   border-radius: 15px;
+}
+
+input {
+  border: 2px solid black;
+}
+
+button {
+  font-weight: 700;
   border: none;
 
   background-color: #646cff;
