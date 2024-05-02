@@ -1,12 +1,13 @@
 import InfoDisplay from './components/InfoDisplay';
 import CardsDisplay from './components/CardsDisplay';
 import { useState, useEffect } from 'react';
+import SearchModal from './components/SearchModal';
+import GameOverModal from './components/GameOverModal';
 
 import { randomiseArray } from './random';
 import getGifs from './apis/giphy';
 
 import './App.css';
-import GameOver from './components/GameOver';
 
 function App() {
   const [images, setImages] = useState([]);
@@ -58,12 +59,21 @@ function App() {
       <div className="container">
         <CardsDisplay images={images} onClick={handleCardClick} />
       </div>
-      <GameOver
-        score={clickedImages.length}
+      <GameOverModal
+        score={score}
         highScore={highScore}
-        active={true}
-        onReset={handleReset}
-        topicErrorMsg={topicErrorMsg}
+        active={gameState === 'game-over'}
+        onReset={startNewGame}
+        searchErrorMsg={searchErrorMsg}
+      />
+      <SearchModal
+        active={gameState === 'round-over'}
+        title={'Another Round!'}
+        message={
+          'Good job. Find some more images and see how high you can score!'
+        }
+        onSubmit={startNewRound}
+        searchErrorMsg={searchErrorMsg}
       />
     </>
   );

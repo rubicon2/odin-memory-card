@@ -8,7 +8,7 @@ export default function GameOverModal({
   highScore,
   active = false,
   onReset,
-  topicErrorMsg,
+  searchErrorMsg,
 }) {
   const [searchString, setSearchString] = useState('');
 
@@ -38,7 +38,9 @@ export default function GameOverModal({
         value={searchString}
         onChange={(event) => setSearchString(event.currentTarget.value)}
       />
-      {topicErrorMsg && <div className="topic-error-msg">{topicErrorMsg}</div>}
+      {searchErrorMsg && (
+        <div className="topic-error-msg">{searchErrorMsg}</div>
+      )}
       <button
         className="game-over-button"
         type="button"
