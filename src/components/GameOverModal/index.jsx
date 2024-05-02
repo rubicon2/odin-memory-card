@@ -11,23 +11,22 @@ export default function GameOverModal({
   searchErrorMsg,
 }) {
   const [searchString, setSearchString] = useState('');
+  const [scoreMessage, setScoreMessage] = useState('');
 
-  // Want this to be set only when component is mounted
-  const [displayedScore, setDisplayedScore] = useState(score);
+  // Only update score message if modal has just been set to active.
+  // Do not change if the score or high score changes!
+  // This will avoid score being changed after the modal has been displayed
+  // (e.g. set to zero on new game before modal has had a chance to fade out).
   useEffect(() => {
-    setDisplayedScore(score);
-  }, []);
-
-  const scoreMessage =
-    score > highScore ? (
-      <div className="score-message">
-        You scored {displayedScore} points... it's a new high score!
-      </div>
-    ) : (
-      <div className="score-message">
-        You scored {displayedScore} points. Better luck next time!
-      </div>
-    );
+    if (active) {
+      setSearchString('');
+      setScoreMessage(
+        score > highScore
+          ? `You scored ${score} points... it's a new high score!`
+          : `You scored ${score} points. Better luck next time!`,
+      );
+    }
+  }, [active]);
 
   return (
     <Modal active={active}>
