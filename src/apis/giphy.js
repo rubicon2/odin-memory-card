@@ -1,5 +1,5 @@
 const API_KEY = 'q60528g7xYbZgGDN3R887xY2C0gerKbw';
-const API_BASE_URL = 'http://api.giphy.com/v1/gifs';
+const API_BASE_URL = 'https://api.giphy.com/v1/gifs';
 
 function createSearchUrl(apiKey, searchTerm, number) {
   return (
@@ -27,7 +27,7 @@ function extractGifs(json) {
 
 export default async function getGifs(searchTerm, number) {
   const requestUrl = createSearchUrl(API_KEY, searchTerm, number);
-  const response = await fetch(requestUrl);
+  const response = await fetch(requestUrl, { mode: 'cors' });
   const json = await response.json();
   return extractGifs(json);
 }
