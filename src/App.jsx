@@ -22,6 +22,7 @@ const initialSearch = [
 function App() {
   const [images, setImages] = useState([]);
   const [clickedImages, setClickedImages] = useState([]);
+  const [searchedTerms, setSearchedTerms] = useState([]);
 
   const [gameState, setGameState] = useState('game-running');
   const [searchErrorMsg, setSearchErrorMsg] = useState('');
@@ -42,6 +43,8 @@ function App() {
 
   function getNewGifs(searchString) {
     return new Promise((resolve, reject) => {
+      if (searchedTerms.includes(searchString))
+        reject(`You've already done those! Try searching for something else.`);
       const gifCount = 10;
       getGifs(searchString, gifCount).then((gifs) => {
         if (gifs.length < gifCount) {
@@ -62,11 +65,13 @@ function App() {
   }
 
   function startNewRound(newTopic) {
+    const newTopicLowerCase = newTopic.toLowerCase();
     setClickedImages([]);
-    getNewGifs(newTopic)
+    getNewGifs(newTopicLowerCase)
       .then((gifs) => {
         setImages(randomiseArray(gifs));
         setSearchErrorMsg(null);
+        setSearchedTerms([...searchedTerms, newTopicLowerCase]);
         setGameState('game-running');
       })
       .catch((message) => {
@@ -77,6 +82,7 @@ function App() {
   function startNewGame(newTopic) {
     if (score > highScore) setHighScore(score);
     setScore(0);
+    setSearchedTerms([]);
     startNewRound(newTopic);
   }
 
