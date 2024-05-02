@@ -20,10 +20,11 @@ export default function GameOverModal({
   useEffect(() => {
     if (active) {
       setSearchString('');
+      const scoreNoun = score === 1 ? 'point' : 'points';
       setScoreMessage(
         score > highScore
-          ? `You scored ${score} points... it's a new high score!`
-          : `You scored ${score} points. Better luck next time!`,
+          ? `You scored ${score} ${scoreNoun}... it's a new high score!`
+          : `You scored ${score} ${scoreNoun}. Better luck next time!`,
       );
     }
   }, [active]);
