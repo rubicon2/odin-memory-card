@@ -1,5 +1,5 @@
 import Modal from '../Modal';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import './index.css';
 
@@ -12,6 +12,10 @@ export default function SearchModal({
 }) {
   const [searchString, setSearchString] = useState('');
   console.log(searchString);
+
+  useEffect(() => {
+    if (active) setSearchString('');
+  }, [active]);
 
   return (
     <Modal active={active}>
