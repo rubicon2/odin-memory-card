@@ -1,9 +1,9 @@
 import InfoDisplay from './components/InfoDisplay';
 import CardsDisplay from './components/CardsDisplay';
-import { useState, useEffect } from 'react';
 import SearchModal from './components/SearchModal';
 import GameOverModal from './components/GameOverModal';
 
+import { useState, useEffect } from 'react';
 import { randomiseArray } from './random';
 import getGifs from './apis/giphy';
 
@@ -11,40 +11,69 @@ import './App.css';
 
 function App() {
   const [images, setImages] = useState([]);
-  // Can get score from length of clickedImages array
   const [clickedImages, setClickedImages] = useState([]);
-  const [isGameOver, setIsGameOver] = useState(false);
+
+  const [gameState, setGameState] = useState('game-running');
+  const [searchErrorMsg, setSearchErrorMsg] = useState('');
+
+  const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
-  const [currentTopic, setCurrentTopic] = useState('cats');
-  const [topicErrorMsg, setTopicErrorMsg] = useState('');
 
   function handleCardClick(image) {
-    if (clickedImages.includes(image)) setIsGameOver(true);
+    if (clickedImages.includes(image)) handleGameOver();
     else {
       setClickedImages([...clickedImages, image]);
-      setImages(randomiseArray(images));
+      setScore(score + 1);
+      // Must check plus 1 as clickedImages won't be updated until next render
+      if (clickedImages.length + 1 === images.length) handleRoundOver();
+      else setImages(randomiseArray(images));
     }
   }
 
-  function handleReset(newTopic) {
-    if (clickedImages.length > highScore) setHighScore(clickedImages.length);
-    setClickedImages([]);
-    setCurrentTopic(newTopic);
+  function getNewGifs(searchString) {
+    return new Promise((resolve, reject) => {
+      const gifCount = 10;
+      getGifs(searchString, gifCount).then((gifs) => {
+        if (gifs.length < gifCount) {
+          reject('Not enough gifs! Try another search term.');
+        } else {
+          resolve(gifs);
+        }
+      });
+    });
   }
 
-  useEffect(() => {
-    getGifs(currentTopic, 10).then((gifs) => {
-      // If the topic doesn't yield 10 gifs, then ask for another prompt
-      if (gifs.length < 10) {
-        // Do ! Some ! Thing!
-        setTopicErrorMsg('Not enough gifs! Try another search term.');
-      } else {
-        setTopicErrorMsg(null);
+  function handleRoundOver() {
+    setGameState('round-over');
+  }
+
+  function handleGameOver() {
+    setGameState('game-over');
+  }
+
+  function startNewRound(newTopic) {
+    setClickedImages([]);
+    getNewGifs(newTopic)
+      .then((gifs) => {
         setImages(randomiseArray(gifs));
-        setIsGameOver(false);
-      }
-    });
-  }, [currentTopic]);
+        setSearchErrorMsg(null);
+        setGameState('game-running');
+      })
+      .catch((message) => {
+        setSearchErrorMsg(message);
+      });
+  }
+
+  function startNewGame(newTopic) {
+    if (score > highScore) setHighScore(score);
+    setScore(0);
+    startNewRound(newTopic);
+  }
+
+  // Run when app is first mounted
+  useEffect(() => {
+    startNewGame('cats');
+  }, []);
 
   return (
     <>
@@ -52,7 +81,7 @@ function App() {
         <InfoDisplay
           title="Memory Game"
           info="Click as many images as you can without clicking the same one twice!"
-          score={clickedImages.length}
+          score={score}
           highScore={highScore}
         />
       </div>
