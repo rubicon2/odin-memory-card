@@ -11,7 +11,6 @@ export default function SearchModal({
   searchErrorMsg,
 }) {
   const [searchString, setSearchString] = useState('');
-  console.log(searchString);
 
   useEffect(() => {
     if (active) setSearchString('');
