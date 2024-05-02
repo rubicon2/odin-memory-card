@@ -4,10 +4,20 @@ import SearchModal from './components/SearchModal';
 import GameOverModal from './components/GameOverModal';
 
 import { useState, useEffect } from 'react';
-import { randomiseArray } from './random';
+import { rangedRandomInt, randomiseArray } from './random';
 import getGifs from './apis/giphy';
 
 import './App.css';
+
+const initialSearch = [
+  'mitski',
+  'radiohead',
+  'ghibli',
+  'dale cooper',
+  'jeff winger',
+  'daria',
+  'jane lane',
+];
 
 function App() {
   const [images, setImages] = useState([]);
@@ -72,7 +82,9 @@ function App() {
 
   // Run when app is first mounted
   useEffect(() => {
-    startNewGame('cats');
+    const randomSearch =
+      initialSearch[rangedRandomInt(0, initialSearch.length - 1)];
+    startNewGame(randomSearch);
   }, []);
 
   return (
