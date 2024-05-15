@@ -27,6 +27,7 @@ export default function GameOverModal({
           : `You scored ${score} ${scoreNoun}. Better luck next time!`,
       );
     }
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, [active]);
 
   return (
