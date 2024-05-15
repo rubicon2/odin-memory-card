@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
 import './index.css';
 
-export default function ScoreDisplay({ score = 0, highScore = 0 }) {
+function ScoreDisplay({ score = 0, highScore = 0 }) {
   return (
     <div className="score-display">
       <div className="score-display-section">
@@ -14,3 +15,10 @@ export default function ScoreDisplay({ score = 0, highScore = 0 }) {
     </div>
   );
 }
+
+ScoreDisplay.propTypes = {
+  score: PropTypes.number,
+  highScore: PropTypes.number,
+};
+
+export default ScoreDisplay;

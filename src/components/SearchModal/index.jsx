@@ -1,9 +1,10 @@
 import Modal from '../Modal';
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import './index.css';
 
-export default function SearchModal({
+function SearchModal({
   active = false,
   title = 'Search',
   message = '',
@@ -38,3 +39,13 @@ export default function SearchModal({
     </Modal>
   );
 }
+
+SearchModal.propTypes = {
+  active: PropTypes.bool,
+  title: PropTypes.string,
+  message: PropTypes.string,
+  onSubmit: PropTypes.func,
+  searchErrorMsg: PropTypes.string,
+};
+
+export default SearchModal;

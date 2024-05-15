@@ -1,12 +1,8 @@
 import ScoreDisplay from '../ScoreDisplay';
+import PropTypes from 'prop-types';
 import './index.css';
 
-export default function InfoDisplay({
-  title = '',
-  info = '',
-  score = 0,
-  highScore = 0,
-}) {
+function InfoDisplay({ title = '', info = '', score = 0, highScore = 0 }) {
   return (
     <div className="info-display">
       <div className="col">
@@ -17,3 +13,12 @@ export default function InfoDisplay({
     </div>
   );
 }
+
+InfoDisplay.propTypes = {
+  title: PropTypes.string,
+  info: PropTypes.string,
+  score: PropTypes.number,
+  highScore: PropTypes.number,
+};
+
+export default InfoDisplay;

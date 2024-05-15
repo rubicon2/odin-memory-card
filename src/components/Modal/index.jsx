@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
 import './index.css';
 
-export default function Modal({ children, active = false }) {
+function Modal({ children, active = false }) {
   let modalClass = 'modal-background';
   if (active) modalClass += ' modal-active';
 
@@ -10,3 +11,10 @@ export default function Modal({ children, active = false }) {
     </div>
   );
 }
+
+Modal.propTypes = {
+  children: PropTypes.node,
+  active: PropTypes.bool,
+};
+
+export default Modal;

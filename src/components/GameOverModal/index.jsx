@@ -1,9 +1,10 @@
 import Modal from '../Modal';
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 import './index.css';
 
-export default function GameOverModal({
+function GameOverModal({
   score,
   highScore,
   active = false,
@@ -52,3 +53,13 @@ export default function GameOverModal({
     </Modal>
   );
 }
+
+GameOverModal.propTypes = {
+  score: PropTypes.number.isRequired,
+  highScore: PropTypes.number.isRequired,
+  active: PropTypes.bool,
+  onReset: PropTypes.func,
+  searchErrorMsg: PropTypes.string,
+};
+
+export default GameOverModal;
